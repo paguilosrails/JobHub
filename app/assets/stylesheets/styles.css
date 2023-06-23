@@ -1,0 +1,33 @@
+.rounded-circle {
+    width: 150px;
+    height: 200px;
+  }
+
+.rounded-circle-comment{
+    width: auto;
+    height: 100px;
+      border-radius: 100px;
+} 
+.btn{
+  background-color: teal;
+}
+  
+.navbar{
+  background-color: teal;
+}
+
+.home{
+  color: white;
+}
+
+.center-link {
+  /* justify-content: center; */
+  /* align-items: center; */
+  height: 100vh; /* Ajusta la altura según tus necesidades */
+  display: block; 
+  margin: 0 auto; 
+  position: absolute; 
+  top: 115%; 
+  left: 40%; 
+  transform: translate(-50%, -50%);  
+}
