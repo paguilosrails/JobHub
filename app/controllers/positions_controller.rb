@@ -1,13 +1,16 @@
 class PositionsController < ApplicationController
-  before_action :set_position, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, except: [:index]
+  before_action :authorize_admin, only: [:create, :update, :edit, :destroy]
+  before_action :set_position, only: [ :show, :edit, :update, :destroy ]
 
   # GET /positions or /positions.json
   def index
     @positions = Position.all
   end
-
+  
   # GET /positions/1 or /positions/1.json
-  def show
+  def show    
+    @position = Position.find(params[:id])
   end
 
   # GET /positions/new
@@ -57,6 +60,21 @@ class PositionsController < ApplicationController
     end
   end
 
+  def apply
+    @position = Position.find(params[:position_id])
+    current_user.position << position
+
+    redirect_to position, notice: 'Te has postulado correctamente a esta oferta laboral.'
+  end
+
+  def apply_show
+    if @position.users.present?
+      @positions = @position.users
+    else
+      flash.now[:notice] = "No hay usuarios relacionados con esta posición."
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_position
@@ -66,5 +84,11 @@ class PositionsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def position_params
       params.require(:position).permit(:title, :description, :responsibilities, :requirements, :salary)
+    end
+
+    def authorize_admin
+      unless current_user.admin?
+        redirect_to home_index_path, notice: "No estás autorizado para hacer esta acción"
+      end
     end
 end

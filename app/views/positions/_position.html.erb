@@ -1,27 +1,30 @@
-<div id="<%= dom_id position %>">
-  <p>
-    <strong>Title:</strong>
-    <%= position.title %>
-  </p>
+<div class="container d-inline justify-content-center align-items-center">   
+    <div id="<%= dom_id position %>">  
+      <div class="card w-75 mt-5">        
+         <div class="card-body">          
+            <h5 class="card-title"><strong>Cargo:</strong>
+            <%= position.title %></h5>       
+      
+            <p class="card-text text-start"> <p><strong>Descripción:</strong>
+               <%= position.description %></p>
+            <p class="card-text text-start"> <p><strong>Responsibilities:</strong>
+               <%= position.responsibilities %></p>  
+            <p class="card-text text-start"> <p><strong>Requirements:</strong>
+               <%= position.requirements %></p> 
+            <p class="card-text text-start"> <p><strong>Salary:</strong>
+               <%= position.salary %></p>  
+                <p><%= link_to "Show this position", position, class: "btn btn-primary"%></p>
+         </div> 
+      </div>
+    </div>  
+     
 
-  <p>
-    <strong>Description:</strong>
-    <%= position.description %>
-  </p>
+      
+   
+      <%# <%= form_with(model: @application, url: applications_path) do |form| %> %>
+        <%# <%= form.hidden_field :job_offer_id, value: @job_offer.id %> %>
+        <%# <%= form.submit 'Postular' %> %>
+      <%# <% end %> %>
 
-  <p>
-    <strong>Responsibilities:</strong>
-    <%= position.responsibilities %>
-  </p>
-
-  <p>
-    <strong>Requirements:</strong>
-    <%= position.requirements %>
-  </p>
-
-  <p>
-    <strong>Salary:</strong>
-    <%= position.salary %>
-  </p>
 
 </div>
