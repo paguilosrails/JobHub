@@ -11,6 +11,7 @@ class PositionsController < ApplicationController
   # GET /positions/1 or /positions/1.json
   def show    
     @position = Position.find(params[:id])
+    @applicants = @position.users
   end
 
   # GET /positions/new
@@ -61,18 +62,16 @@ class PositionsController < ApplicationController
   end
 
   def apply
-    @position = Position.find(params[:position_id])
-    current_user.position << position
-
-    redirect_to position, notice: 'Te has postulado correctamente a esta oferta laboral.'
+    @position = Position.find(params[:id])
+    current_user.positions << @position
+  
+    redirect_to @position, notice: 'Te has postulado correctamente a esta oferta laboral.'
   end
+  
 
-  def apply_show
-    if @position.users.present?
-      @positions = @position.users
-    else
-      flash.now[:notice] = "No hay usuarios relacionados con esta posición."
-    end
+  def apply_show   
+      @position = Position.find(params[:id])
+      @applicants = @position.users  
   end
 
   private

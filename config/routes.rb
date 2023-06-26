@@ -5,10 +5,11 @@ devise_for :users, controllers: {
  }
 
  resources :positions do
-  member do
-    post 'apply/:user_id', to: 'position#apply', as: 'apply_to_position'
-  end
+  post 'apply', on: :member
 end
+
+  
+
 
   # resources :users do
     # get 'new_user_registration', on: :collection
